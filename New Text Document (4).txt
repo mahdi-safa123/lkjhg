@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>العدالة — مساعدة الحيوانات</title>
+  <meta name="description" content="مبادرة العدالة لمساعدة الحيوانات: إنقاذ، علاج، تبني، وتوعية.">
+  <style>
+    :root{
+      --bg:#0f172a;         /* slate-900 */
+      --card:#111827;       /* gray-900 */
+      --muted:#94a3b8;      /* slate-400 */
+      --text:#e5e7eb;       /* gray-200 */
+      --brand:#22c55e;      /* green-500 */
+      --brand-2:#10b981;    /* emerald-500 */
+      --danger:#ef4444;     /* red-500 */
+      --accent:#38bdf8;     /* sky-400 */
+      --ring: rgba(56,189,248,.55);
+      --radius: 18px;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --maxw: 1150px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Naskh Arabic UI", "Tajawal", Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(34,197,94,.15), transparent 60%),
+                  radial-gradient(1000px 500px at -10% 10%, rgba(56,189,248,.15), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--maxw); margin-inline:auto; padding:24px}
+    header{position:sticky; top:0; z-index:50; backdrop-filter: blur(8px); background: rgba(17,24,39,.75); border-bottom:1px solid rgba(148,163,184,.12)}
+    .nav{display:flex; align-items:center; justify-content:space-between}
+    .logo{display:flex; gap:10px; align-items:center}
+    .logo .mark{width:40px; height:40px; border-radius:50%; background: conic-gradient(from 180deg, var(--brand), var(--accent), var(--brand-2)); box-shadow:0 0 0 3px rgba(34,197,94,.2)}
+    .logo h1{margin:0; font-size:1.25rem; letter-spacing:.5px}
+    .nav a.btn{padding:10px 16px; background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#052e16; font-weight:700; border-radius:12px; box-shadow: var(--shadow); border:1px solid rgba(255,255,255,.1)}
+
+    /* Hero */
+    .hero{padding:48px 0 16px}
+    .hero-grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:28px; align-items:center}
+    .title{font-size: clamp(28px, 3.6vw, 48px); line-height:1.1; margin:6px 0 14px;}
+    .subtitle{color:var(--muted); font-size:1.05rem}
+    .cta{display:flex; gap:12px; margin-top:18px; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:14px; border:1px solid rgba(255,255,255,.08); background:#0b1220; color:var(--text); box-shadow: var(--shadow)}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#052e16; font-weight:800}
+    .btn.ghost{background: transparent}
+    .hero-card{background: linear-gradient(165deg, rgba(56,189,248,.08), rgba(34,197,94,.05)); border:1px solid rgba(148,163,184,.15); padding:18px; border-radius: var(--radius); box-shadow: var(--shadow)}
+    .stat{
+      display:grid; grid-template-columns: auto 1fr; gap:10px; align-items:center; background:#0b1220; border:1px solid rgba(148,163,184,.12); padding:12px; border-radius:14px; margin-top:10px
+    }
+
+    /* Sections */
+    section{padding:36px 0}
+    h2{font-size: clamp(22px, 2.6vw, 34px); margin:0 0 16px}
+    .grid{display:grid; gap:16px}
+    .grid.cards{grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))}
+    .card{background: linear-gradient(165deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); border:1px solid rgba(148,163,184,.12); padding:18px; border-radius: var(--radius); box-shadow: var(--shadow)}
+    .card h3{margin:0 0 8px; font-size:1.15rem}
+    .card p{margin:0; color:var(--muted)}
+
+    /* Forms */
+    form{display:grid; gap:10px}
+    label{font-weight:600}
+    input, select, textarea{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(148,163,184,.2); background:#0b1220; color:var(--text); outline:none;
+    }
+    input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 4px var(--ring); border-color:var(--accent)}
+    .inline{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+
+    /* Donation pills */
+    .pill-row{display:flex; flex-wrap:wrap; gap:8px}
+    .pill{padding:10px 14px; background:#0b1220; border:1px solid rgba(148,163,184,.18); border-radius:999px; cursor:pointer}
+    .pill.active{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#052e16; font-weight:800}
+
+    /* Footer */
+    footer{padding:32px 0 60px; color:var(--muted); border-top:1px solid rgba(148,163,184,.12)}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns: 1fr}
+      .inline{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav" aria-label="التنقل">
+      <div class="logo">
+        <span class="mark" aria-hidden="true"></span>
+        <h1 title="العدالة">العدالة</h1>
+      </div>
+      <nav class="top-links">
+        <a class="btn" href="#donate">تبرّع الآن</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="subtitle">مبادرة أهلية غير ربحية</p>
+          <h2 class="title">العدالة — معاً لنصرة الحيوانات وإحياء الرحمة</h2>
+          <p class="subtitle">نُنقذ، نُعالج، ونوفّر بيوتاً دافئة للتبنّي. تبرّعك أو تطوّعك يصنع الفرق اليوم قبل غد.</p>
+          <div class="cta">
+            <a href="#donate" class="btn primary">تبرّع الآن</a>
+            <a href="#volunteer" class="btn ghost">سجّل كمتطوّع</a>
+            <a href="#report" class="btn ghost">أبلغ عن حالة</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="إحصاءات">
+          <div class="stat">
+            <strong>+250</strong>
+            <span>حالة إنقاذ خلال آخر 12 شهراً</span>
+          </div>
+          <div class="stat">
+            <strong>+180</strong>
+            <span>علاج/لقاح مُكتمل</span>
+          </div>
+          <div class="stat">
+            <strong>+95</strong>
+            <span>تبنّي ناجح لحيوانات مشرّدة</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- What we do -->
+    <section id="work">
+      <div class="container">
+        <h2>ماذا نفعل</h2>
+        <div class="grid cards">
+          <article class="card">
+            <h3>الإنقاذ السريع</h3>
+            <p>الاستجابة للبلاغات وإنقاذ الحيوانات المصابة أو المعرّضة للخطر.</p>
+          </article>
+          <article class="card">
+            <h3>العلاج والرعاية</h3>
+            <p>تقديم الرعاية البيطرية، التطعيمات، والتأهيل قبل التبنّي.</p>
+          </article>
+          <article class="card">
+            <h3>التبنّي والمسؤولية</h3>
+            <p>التوفيق بين الحيوانات المؤهَّلة وأُسر محبّة مناسبة.</p>
+          </article>
+          <article class="card">
+            <h3>التوعية والدعم</h3>
+            <p>نشر ثقافة الرفق بالحيوان والدعم المجتمعي المستدام.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donate -->
+    <section id="donate">
+      <div class="container">
+        <h2>التبرّع</h2>
+        <div class="card" role="region" aria-label="نموذج التبرّع">
+          <form id="donationForm">
+            <div class="pill-row" aria-label="مبالغ سريعة">
+              <button type="button" class="pill" data-amount="5">5$</button>
+              <button type="button" class="pill" data-amount="10">10$</button>
+              <button type="button" class="pill" data-amount="20">20$</button>
+              <button type="button" class="pill" data-amount="50">50$</button>
+              <button type="button" class="pill" data-amount="100">100$</button>
+            </div>
+            <label for="amount">المبلغ (بالدولار)</label>
+            <input id="amount" name="amount" type="number" min="1" step="1" placeholder="اكتب مبلغاً مخصّصاً" required>
+            <label for="method">طريقة الدفع</label>
+            <select id="method" name="method" required>
+              <option value="" disabled selected>اختر الطريقة</option>
+              <option value="card">بطاقة مصرفية</option>
+              <option value="cash">نقدًا/تحويل محلّي</option>
+              <option value="other">أخرى</option>
+            </select>
+            <div class="inline">
+              <div>
+                <label for="name">الاسم</label>
+                <input id="name" name="name" type="text" placeholder="اسمك الثلاثي" required>
+              </div>
+              <div>
+                <label for="phone">الهاتف</label>
+                <input id="phone" name="phone" type="tel" placeholder="مثال: 07xx xxx xxxx" required>
+              </div>
+            </div>
+            <button class="btn primary" type="submit">إتمام التبرّع</button>
+            <p class="subtitle" id="donateNote">* سيتم التواصل معك لتأكيد تفاصيل الدفع.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Volunteer -->
+    <section id="volunteer">
+      <div class="container">
+        <h2>التطوّع</h2>
+        <div class="card">
+          <form id="volForm">
+            <div class="inline">
+              <div>
+                <label for="vname">الاسم الكامل</label>
+                <input id="vname" name="vname" type="text" required>
+              </div>
+              <div>
+                <label for="vcity">المدينة</label>
+                <input id="vcity" name="vcity" type="text" placeholder="مثال: بغداد" required>
+              </div>
+            </div>
+            <div class="inline">
+              <div>
+                <label for="vphone">الهاتف</label>
+                <input id="vphone" name="vphone" type="tel" required>
+              </div>
+              <div>
+                <label for="vskills">المهارات المتاحة</label>
+                <select id="vskills" name="vskills" required>
+                  <option value="" disabled selected>اختر</option>
+                  <option>نقل وإسعاف</option>
+                  <option>استضافة مؤقتة</option>
+                  <option>تصوير ونشر</option>
+                  <option>جمع تبرّعات</option>
+                </select>
+              </div>
+            </div>
+            <label for="vnote">ملاحظات</label>
+            <textarea id="vnote" name="vnote" rows="3" placeholder="أوقات التفرّغ، وسيلة تواصل، إلخ..."></textarea>
+            <button class="btn" type="submit">إرسال طلب التطوّع</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Report a case -->
+    <section id="report">
+      <div class="container">
+        <h2>الإبلاغ عن حالة</h2>
+        <div class="card">
+          <form id="reportForm">
+            <label for="rtype">نوع الحالة</label>
+            <select id="rtype" name="rtype" required>
+              <option value="" disabled selected>اختر</option>
+              <option>إصابة/نزف</option>
+              <option>مريضة/منهكة</option>
+              <option>مفقودة/تبنّي</option>
+              <option>إساءة معاملة</option>
+            </select>
+            <div class="inline">
+              <div>
+                <label for="rloc">الموقع</label>
+                <input id="rloc" name="rloc" type="text" placeholder="العنوان/المنطقة" required>
+              </div>
+              <div>
+                <label for="rphone">هاتف المبلّغ</label>
+                <input id="rphone" name="rphone" type="tel" required>
+              </div>
+            </div>
+            <label for="rdesc">وصف مختصر</label>
+            <textarea id="rdesc" name="rdesc" rows="3" placeholder="صف الحالة بإيجاز" required></textarea>
+            <button class="btn" type="submit">إرسال البلاغ</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="grid cards" style="grid-template-columns:2fr 1fr; gap:20px">
+        <div class="card">
+          <h3>عن مبادرة العدالة</h3>
+          <p class="subtitle">نسعى إلى تخفيف معاناة الحيوانات في شوارعنا عبر الإنقاذ والعلاج والتبنّي والتوعية. دعمكم هو الوقود الحقيقي لاستمرار العمل.</p>
+        </div>
+        <div class="card">
+          <h3>تواصل</h3>
+          <p class="subtitle">بريد: support@aladala.example</p>
+          <p class="subtitle">هاتف: 07xx xxx xxxx</p>
+          <div class="cta">
+            <a class="btn ghost" href="#volunteer">انضمّ لنا</a>
+            <a class="btn" href="#donate">ادعم المبادرة</a>
+          </div>
+        </div>
+      </div>
+      <p class="subtitle" style="margin-top:18px">© <span id="year"></span> العدالة — كل الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <script>
+    // سنة ديناميكية في الفوتر
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // تمرير ناعم
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        const target = document.querySelector(id);
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+      })
+    })
+
+    // أزرار مبالغ التبرع السريعة
+    const amountInput = document.getElementById('amount');
+    const pills = document.querySelectorAll('.pill');
+    pills.forEach(p=>{
+      p.addEventListener('click', ()=>{
+        pills.forEach(x=>x.classList.remove('active'));
+        p.classList.add('active');
+        amountInput.value = p.dataset.amount;
+        amountInput.focus();
+      })
+    })
+
+    // نماذج (مجرد محاكاة إرسال محلي)
+    const toast = (msg)=>{
+      const t = document.createElement('div');
+      t.textContent = msg; t.setAttribute('role','status');
+      t.style.cssText = 'position:fixed; bottom:20px; left:20px; background:#0b1220; border:1px solid rgba(148,163,184,.3); padding:12px 14px; border-radius:12px; box-shadow:var(--shadow); z-index:9999';
+      document.body.appendChild(t); setTimeout(()=>t.remove(), 3200);
+    }
+
+    document.getElementById('donationForm').addEventListener('submit', e=>{
+      e.preventDefault();
+      toast('تم استلام تفاصيل التبرّع. سنقوم بالتواصل لتأكيد الدفع. شكراً لدعمك!');
+      e.target.reset(); pills.forEach(x=>x.classList.remove('active'));
+    })
+    document.getElementById('volForm').addEventListener('submit', e=>{
+      e.preventDefault(); toast('شكراً لتطوّعك! سنعود إليك قريباً.'); e.target.reset(); })
+    document.getElementById('reportForm').addEventListener('submit', e=>{
+      e.preventDefault(); toast('تم استلام البلاغ، شكراً لحرصك. فريق الإنقاذ سيتواصل لاحقاً.'); e.target.reset(); })
+  </script>
+</body>
+</html>
